@@ -1,0 +1,154 @@
+$bg-dark: #1b1b1b;
+$bg-darker: #141414;
+$text-primary: #ffffff;
+$text-secondary: #808080;
+$bid-color: #26a69a;
+$ask-color: #ef5350;
+$border-color: #2a2a2a;
+
+.order-book {
+  background-color: $bg-dark;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 32rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .control-button {
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      color: $text-secondary;
+      transition: all 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: $text-primary;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      svg {
+        display: block;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      height: 1rem;
+      background-color: $border-color;
+      margin: 0 0.25rem;
+    }
+  }
+
+  &__table-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid $border-color;
+    font-size: 0.75rem;
+    color: $text-secondary;
+    text-align: right;
+  }
+
+  &__content {
+    overflow: hidden;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__spread {
+    text-align: center;
+    padding: 0.5rem;
+    color: $text-secondary;
+    font-size: 0.875rem;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    background-color: $bg-darker;
+  }
+}
+
+.order-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+  text-align: right;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &__depth {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    opacity: 0.15;
+    transition: width 0.3s ease;
+    z-index: 0;
+
+    &--bid {
+      right: 0;
+      background-color: $bid-color;
+    }
+
+    &--ask {
+      left: 0;
+      background-color: $ask-color;
+    }
+  }
+
+  &__price {
+    position: relative;
+    z-index: 1;
+    font-family: 'Monaco', 'Menlo', monospace;
+    transition: background-color 0.2s;
+
+    &--bid {
+      color: $bid-color;
+      &.highlight {
+        background-color: rgba($bid-color, 0.2);
+      }
+    }
+
+    &--ask {
+      color: $ask-color;
+      &.highlight {
+        background-color: rgba($ask-color, 0.2);
+      }
+    }
+  }
+
+  &__amount, &__total {
+    position: relative;
+    z-index: 1;
+    color: $text-primary;
+    font-family: 'Monaco', 'Menlo', monospace;
+  }
+}
